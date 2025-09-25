@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Aysun Suleymani - Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            /*background: radial-gradient(circle at 20% 50%, #ff4081 0%, transparent 50%),*/
+            /*radial-gradient(circle at 80% 20%, #9c27b0 0%, transparent 50%),*/
+            /*radial-gradient(circle at 40% 40%, #673ab7 0%, transparent 50%),*/
+            /*radial-gradient(circle at 0% 100%, #ff9800 0%, transparent 50%),*/
+            /*radial-gradient(circle at 80% 100%, #ffeb3b 0%, transparent 50%),*/
+            /*radial-gradient(circle at 0% 0%, #e91e63 0%, transparent 50%),*/
+            /*linear-gradient(135deg, #ff6b9d, #c77dff, #7209b7, #560bad, #f72585);*/
+            background: linear-gradient(135deg, #ffa9f9, #fff7ad);
+            background-attachment: fixed;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* --- Header Styles --- */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: background 0.3s ease;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin-left: 2rem;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .typing-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 300;
+            color: white;
+            text-align: center;
+            margin: 0;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+            border-right: 3px solid rgba(255, 255, 255, 0.75);
+            white-space: nowrap;
+            width: fit-content;
+            animation: typewriter 2s steps(15) 0.5s forwards,
+            blinkCursor 500ms steps(2) infinite,
+            hideCursor 0s 1.3s forwards;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-top: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s 3.5s forwards;
+            text-align: center;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeInUp 1s 4s forwards;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+
+        .portfolio-section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .project-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0);
+            backdrop-filter: blur(40px);
+            border: 2px solid white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 700px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+
+        @keyframes typewriter {
+            from {
+                width: 0
+            }
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blinkCursor {
+            0%, 50% {
+                border-right-color: rgba(255, 255, 255, 0.75)
+            }
+            51%, 100% {
+                border-right-color: transparent
+            }
+        }
+
+        @keyframes hideCursor {
+            to {
+                border-right-color: transparent;
+                border-right-width: 0;
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0)
+            }
+            40% {
+                transform: translateY(-10px)
+            }
+            60% {
+                transform: translateY(-5px)
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-header {
+                padding: 1.5rem;
+            }
+
+            .nav-links {
+                margin-left: 1rem;
+            }
+
+            .nav-links li a {
+                padding: 0.5rem;
+            }
+
+            .typing-name {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 2rem;
+                margin: 1rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .typing-name {
+                font-size: 1.5rem;
+            }
+        }
+
+
+        .github-btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .github-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        .github-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1rem 0;
+            color: white;
+            background: transparent;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="main-header">
+    <a href="#" class="logo">Aysun Suleymani</a>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero-section">
+    <h1 class="typing-name">Aysun Suleymani</h1>
+
+    <div class="scroll-indicator" onclick="scrollToPortfolio()">
+    </div>
+</section>
+
+<section class="portfolio-section" id="about">
+    <h2 class="section-title">About Me</h2>
+    <div style="text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+        <p>
+            Hello! I'm Aysun Suleymani, a fourth-year software engineering student passionate about
+            solving complex problems and building solutions.
+            Technologies that I have been working are: SpringBoot, Django, ASP.NET, Java, Python, C#.
+            I am highly interested in concepts like AI, Machine Learning and Data Science.
+        </p>
+    </div>
+</section>
+
+<section class="portfolio-section" id="projects">
+    <h2 class="section-title">My Projects</h2>
+
+    <div class="projects-grid">
+        <div class="project-card" onclick="openModal('project1')">
+            <h3 class="project-title">EasyFood</h3>
+            <p class="project-description">Project built for online food ordering.</p>
+            <div class="project-tech">
+                <span class="tech-tag">Spring Boot</span>
+                <span class="tech-tag">PostgreSQL</span>
+            </div>
+        </div>
+
+        <div class="project-card" onclick="openModal('project2')">
+            <h3 class="project-title">Tic-Tac-Toe</h3>
+            <p class="project-description">Game built with a focus on DevOps practices.</p>
+            <div class="project-tech">
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">PostgreSQL</span>
+            </div>
+        </div>
+
+        <div class="project-card" onclick="openModal('project3')">
+            <h3 class="project-title">AutoZona</h3>
+            <p class="project-description">Platform for car listings and browsing.</p>
+            <div class="project-tech">
+                <span class="tech-tag">ASP.NET Core</span>
+                <span class="tech-tag">API Integration</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal" id="projectModal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>© 2025 Aysun Suleymani. All Rights Reserved.</p>
+</footer>
+
+
+<script>
+
+    const projects = {
+        project1: {
+            title: "EasyFood",
+            description: `
+                <p>EasyFood is an online food ordering platform that connects restaurants with customers.
+                It allows users to browse menus, place orders, and track deliveries in real-time.</p>
+
+                <h4>Key Features:</h4>
+                <ul>
+                    <li>Restaurant and menu browsing</li>
+                    <li>User authentication and profile management</li>
+                    <li>Cart and order tracking system</li>
+                    <li>Admin panel for managing restaurants and orders</li>
+                </ul>
+
+                <h4>Technical Highlights:</h4>
+                <ul>
+                    <li>SpringBoot for backend</li>
+                    <li>PostgreSQL for database</li>
+                </ul>
+            `,
+            links: [
+                {text: "", url: "https://github.com/aysunsuleymanii/DatabaseProject"}
+            ]
+        },
+        project2: {
+            title: "Tic-Tac-Toe",
+            description: `
+                <p>A classic Tic-Tac-Toe game built with a strong focus on DevOps practices.
+                This project was designed not only as a game but also as a way to practice
+                CI/CD pipelines, containerization, and automated testing.</p>
+
+                <h4>Key Features:</h4>
+                <ul>
+                    <li>Interactive UI with React</li>
+                    <li>Real-time multiplayer support</li>
+                    <li>Leaderboards and score tracking</li>
+                </ul>
+
+                <h4>DevOps Highlights:</h4>
+                <ul>
+                    <li>Dockerized deployment</li>
+                    <li>CI/CD pipeline setup</li>
+                    <li>Kubernetes for container orchestration</li>
+                </ul>
+            `,
+            links: [
+                {text: "", url: "https://github.com/aysunsuleymanii/tictactoe-devops"}
+            ]
+        },
+        project3: {
+            title: "AutoZona",
+            description: `
+                <p>AutoZona is a web platform for listing and browsing cars.
+                It provides advanced search and filtering features, making it easy
+                for users to find vehicles based on their preferences. It allows users to add and manage their listings.</p>
+
+                <h4>Key Features:</h4>
+                <ul>
+                    <li>Car listing and detailed descriptions</li>
+                    <li>Search and filter by price, brand, and model</li>
+                    <li>User authentication and profile management</li>
+                </ul>
+
+                <h4>Technical Highlights:</h4>
+                <ul>
+                    <li>ASP.NET Core backend</li>
+                    <li>API integrations for car data</li>
+                    <li>Responsive design with modern UI</li>
+                </ul>
+            `,
+            links: [
+                {text: "", url: "https://github.com/aysunsuleymanii/AutoZona"}
+            ]
+        }
+    };
+
+    // Smooth scroll to portfolio
+    function scrollToPortfolio() {
+        const el = document.getElementById('projects');
+        if (el) el.scrollIntoView({behavior: 'smooth'});
+    }
+
+    // Intersection Observer for animations
+    const observerOptions = {threshold: 0.1, rootMargin: '0px 0px -50px 0px'};
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (entry.target.classList.contains('section-title')) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.transition = 'all 1s ease 0.2s';
+                } else if (entry.target.classList.contains('project-card')) {
+                    const cards = document.querySelectorAll('.project-card');
+                    const index = Array.from(cards).indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.style.transition = 'all 0.6s ease';
+                    }, index * 150);
+                }
+            }
+        });
+    }, observerOptions);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.section-title, .project-card').forEach(el => observer.observe(el));
+    });
+
+    // Modal functions
+    function openModal(projectId) {
+        const modal = document.getElementById('projectModal');
+        const modalContent = document.getElementById('modalContent');
+        const project = projects[projectId];
+        if (!project) return;
+
+        let linksHtml = '';
+        if (project.links && project.links.length > 0) {
+            linksHtml = '<div class="project-links">';
+            project.links.forEach(link => {
+                linksHtml += `
+        <a href="${link.url}" class="github-btn" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="white">
+                <path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1 1.6.8 1.9 1.3.2.5.6.6 1 .6.6-.1 1-.2 1.3-.4-2.5-.3-5.1-1.2-5.1-5.5 0-1.2.4-2.1 1-2.8-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1.8-.2 1.7-.3 2.5-.3s1.7.1 2.5.3c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8.7.7 1 1.6 1 2.8 0 4.3-2.6 5.2-5.1 5.5.4.3.8.8.8 1.6v2.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/>
+            </svg>
+        </a>
+    `;
+            });
+
+            linksHtml += '</div>';
+        }
+
+        modalContent.innerHTML = `
+            <h2 class="modal-title">${project.title}</h2>
+            <div class="modal-description">${project.description}</div>
+            ${linksHtml}
+        `;
+
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('projectModal');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside or pressing Escape
+    window.addEventListener('click', (event) => {
+        const modal = document.getElementById('projectModal');
+        if (event.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeModal();
+    });
+</script>
+</body>
+</html>
